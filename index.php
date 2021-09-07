@@ -26,7 +26,7 @@
                             echo "Contact ajouté";
                         }
                         else{
-                            echo "C'est con";
+                            echo "Dommage";
                         }
                     }
                 }
@@ -38,7 +38,12 @@
             $requete = $bdd->query($sql);
         ?>
         <h1><center>Mes contacts</center></h1>
-        <h2>Nombre de contacts : </h2>
+        <h2>Nombre de contacts : 
+        <?php 
+            $nbNom = $bdd->query ('SELECT COUNT(nom) as nbNom FROM contacts'); 
+            $nbligne = $nbNom->fetch();
+            echo $nbligne['nbNom'];
+        ?></h2>
         <table border="1">
         <tr>
             <th>Numéro</th>
@@ -49,23 +54,23 @@
         </tr>
         <tr>
             <?php while($row = $requete->fetch()) { ?>
-            <td><?php echo $row['numero']; ?></td>
-            <td><?php echo $row['nom']; ?></td>
-            <td><?php echo $row['prenom']; ?></td>
-            <td><?php echo $row['email']; ?></td>
-            <td><?php echo $row['commentaire']; ?></td>
+            <td><?php echo $row['Numero']; ?></td>
+            <td><?php echo $row['Nom']; ?></td>
+            <td><?php echo $row['Prenom']; ?></td>
+            <td><?php echo $row['Email']; ?></td>
+            <td><?php echo $row['Commentaire']; ?></td>
         </tr>
         <?php
             }
         ?>
         </table>
         <br><br><br>
-        <form method="post" action="index.php">
-            <label>Nom : </label><input type="text" name="nom"><br><br>
-            <label>Prenom : </label><input type="text" name="prenom"><br><br>
-            <label>Email : </label><input type="text" name="email"><br><br>
-            <label>Numéro : </label><input type="text" name="numero"><br><br>
-            <label>Commentaire : </label><input type="text" name="commentaire"><br><br>
+        <form method="post">
+            <label>Nom : </label><input type="text" name="Nom"><br><br>
+            <label>Prenom : </label><input type="text" name="Prenom"><br><br>
+            <label>Email : </label><input type="text" name="Email"><br><br>
+            <label>Numéro : </label><input type="text" name="Numero"><br><br>
+            <label>Commentaire : </label><input type="text" name="Commentaire"><br><br>
             <input type="submit" value="Valider">
         </form>
     </body>
